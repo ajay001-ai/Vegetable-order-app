@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: veg-order-mongodb
+  name: ajay-ns
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb-container
+        image: ajaykumar5292/veg-app:v1
+        ports:
+          - containerPort: 27017
+    

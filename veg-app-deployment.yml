@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: veg-order-deployment
+  namespace: ajay-ns
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: veg-order
+  template:
+    metadata:
+      labels: 
+        app: veg-order
+    spec:
+      containers:
+      - name: veg-order-container
+        image: ajaykumar5292/veg-app:v1
+        ports:
+          - containerPort: 3000
+        env:
+          - name: MONGODB_URI
+            valueFrom:
+              configMapKeyRef:
+                name: veg-order-config
+                key: MONGODB_URI
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: veg-order-config
+                key: PORT
+
